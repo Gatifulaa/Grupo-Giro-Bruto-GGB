@@ -7,6 +7,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
+<style>
+  .user-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 15px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 215, 0, 0.3); /* Cor amarela suave */
+  }
+
+  .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--yellow);
+  }
+
+  .user-name {
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+  }
+</style>
 <body>
 
 <!-- HEADER -->
@@ -265,19 +289,20 @@
     .then(res => res.json())
     .then(user => {
       if (user.id) {
-        const avatarUrl = `https://discordapp.com{user.id}/${user.avatar}.png`;
+        const avatarUrl = user.avatar 
+                ? `https://discordapp.com/{user.id}/${user.avatar}.png`
+                : `https://discordapp.com`;
         
         loginLink.outerHTML = `
-            <div id="perfil-header" style="display: flex; align-items: center; gap: 10px;">
-                <img src="${avatarUrl}" style="width: 30px; border-radius: 50%;">
-                <span style="color: white; font-weight: bold;">${user.username}</span>
-                <button onclick="logout()" style="color: red; background: none; border: none; cursor: pointer;">Sair</button>
-            </div>
+          <div class="user-profile-header">
+            <img src="${avatarUrl}" alt="Avatar" class="user-avatar">
+            <span class="user-name">${user.username}</span>
+          </div>
         `;
 
         return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
+          headers: { authorization: `Bearer ${token}` }
+        });;
       }
     })
     .then(res => res && res.ok ? res.json() : null)
