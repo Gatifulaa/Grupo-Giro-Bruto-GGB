@@ -18,7 +18,7 @@
       <div class="sub">Grupo Giro Bruto</div>
     </div>
   </div>
-  <nav>
+  <nav id="nav-container">
     <a href="#sobre">Sobre</a>
     <a href="#frota">Serviços</a>
     <a href="#contato">Contato</a>
@@ -254,42 +254,56 @@
   };
 
   function exibirDados(token) {
-      document.getElementById('login-link').style.display = 'none';
-      document.getElementById('perfil').style.display = 'block';
-      document.getElementById('msg').innerText = "Carregando dados...";
+    const loginLink = document.getElementById('login-link');
+    const navContainer = document.getElementById('nav-container');
 
-      fetch('https://discord.com/api/users/@me', {
-        headers: { authorization: `Bearer ${token}` }
-      })
-      .then(res => res.json())
-      .then(user => {
-        if (user.id) {
-          document.getElementById('username').innerText = user.username;
-          document.getElementById('avatar').src = `https://discordapp.com/{user.id}/${user.avatar}.png`;
-          return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
-            headers: { authorization: `Bearer ${token}` }
-          });
-        }
-      })
-      .then(res => res ? res.json() : null)
-      .then(member => {
+    if (!loginLink || !navContainer) return;
+
+    fetch('https://discord.com', {
+      headers: { authorization: `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(user => {
+      if (user.id) {
+        const avatarUrl = `https://discordapp.com{user.id}/${user.avatar}.png`;
+            
+            loginLink.outerHTML = `
+                <div id="perfil-header" style="display: flex; align-items: center; gap: 10px; margin-left: 15px;">
+                    <img src="${avatarUrl}" style="width: 35px; border-radius: 50%; border: 2px solid var(--yellow);">
+                    <div style="text-align: left;">
+                        <div style="font-size: 14px; font-weight: bold; color: white;">${user.username}</div>
+                        <div id="cargo-status" style="font-size: 10px; color: var(--yellow);">Carregando...</div>
+                    </div>
+                    <button onclick="logout()" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 12px; padding: 0;">Sair</button>
+                </div>
+            `;
+
+        return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
+          headers: { authorization: `Bearer ${token}` }
+        });
+      }
+    })
+    .then(res => res ? res.json() : null)
+    .then(member => {
+      const cargoStatus = document.getElementById('cargo-status');
+      if (cargoStatus) {
         if (member && member.roles) {
-          document.getElementById('cargo').innerText = "Membro da Empresa ✓";
+          cargoStatus.innerText = "Membro GGB ✓";
         } else {
-          document.getElementById('cargo').innerText = "Não localizado na empresa";
+          cargoStatus.innerText = "Não vinculado";
+          cargoStatus.style.color = "#ff4d4d";
         }
-        document.getElementById('msg').innerText = "";
-      })
-      .catch(err => {
-        console.error("Erro:", err);
-        document.getElementById('msg').innerText = "Erro ao carregar perfil.";
-      });
-    }
+      }
+    })
+    .catch(err => {
+      console.error("Erro ao carregar dados:", err);
+    });
+  }
 
-    function logout() {
-        localStorage.removeItem('discord_token');
-        window.location.href = window.location.pathname;
-    }
+  function logout() {
+      ocalStorage.removeItem('discord_token');
+    window.location.href = window.location.pathname;
+  }
 </script>
 </body>
 </html>
