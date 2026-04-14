@@ -258,14 +258,14 @@
       document.getElementById('perfil').style.display = 'block';
       document.getElementById('msg').innerText = "Carregando dados...";
 
-      fetch('https://discord.com', {
+      fetch('https://discord.com/api/users/@me', {
         headers: { authorization: `Bearer ${token}` }
       })
       .then(res => res.json())
       .then(user => {
         if (user.id) {
           document.getElementById('username').innerText = user.username;
-          document.getElementById('avatar').src = `https://discordapp.com{user.id}/${user.avatar}.png`;
+          document.getElementById('avatar').src = `https://discordapp.com/{user.id}/${user.avatar}.png`;
           return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
             headers: { authorization: `Bearer ${token}` }
           });
@@ -282,7 +282,7 @@
       })
       .catch(err => {
         console.error("Erro:", err);
-        logout();
+        document.getElementById('msg').innerText = "Erro ao carregar perfil.";
       });
     }
 
