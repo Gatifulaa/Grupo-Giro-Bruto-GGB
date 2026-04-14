@@ -62,7 +62,7 @@
     text-transform: uppercase;
   }
 
-  nav { display: flex; gap: 32px; }
+  nav { display: flex; gap: 32px; align-items: center; }
 
   nav a {
     font-family: 'Oswald', sans-serif;
@@ -207,10 +207,37 @@
     cursor: pointer;
   }
 
+
   .btn-primary:hover {
     background: #fff;
     transform: translateY(-2px);
   }
+
+nav .btn-login {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--dark) !important;
+  background: var(--yellow);
+  padding: 9px 23px;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  transition: background .2s, transform .2s, color .2s;
+  cursor: pointer;
+}
+
+nav .btn-login::after {
+    display: none;
+}
+
+nav .btn-login:hover {
+    background: #fff;
+    color: var(--dark) !important;
+    transform: translateY(-2px);
+}
 
   /* ── STATS STRIP ── */
   .stats-strip {

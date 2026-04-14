@@ -22,6 +22,7 @@
     <a href="#sobre">Sobre</a>
     <a href="#frota">Serviços</a>
     <a href="#contato">Contato</a>
+    <a href="#" id="login-link" class="btn-login">Login</a>
   </nav>
 </header>
 
@@ -225,6 +226,70 @@
       l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--yellow)' : '';
     });
   });
+
+  const CLIENT_ID = '1493686411704930304'; 
+  const REDIRECT_URI = "https://grupo-giro-bruto-ggb.vercel.app/"; 
+  const ID_DA_EMPRESA = '1493000493335838813';
+
+  window.onload = () => {
+    const loginBtn = document.getElementById('login-link');
+
+    if (loginBtn) {
+      loginBtn.addEventListener('click', function(e) {
+        e.preventDefault();      
+        const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify+guilds.members.read`;
+        console.log("Tentando redirecionar para:", authUrl);
+        window.location.href = authUrl;
+      });
+    }
+
+    const fragment = new URLSearchParams(window.location.hash.slice(1));
+    const accessToken = fragment.get('access_token') || localStorage.getItem('discord_token');
+
+    if (accessToken) {
+      localStorage.setItem('discord_token', accessToken);
+      window.history.replaceState({}, document.title, window.location.pathname);
+      exibirDados(accessToken);
+    }
+  };
+
+  function exibirDados(token) {
+      document.getElementById('login-link').style.display = 'none';
+      document.getElementById('perfil').style.display = 'block';
+      document.getElementById('msg').innerText = "Carregando dados...";
+
+      fetch('https://discord.com', {
+        headers: { authorization: `Bearer ${token}` }
+      })
+      .then(res => res.json())
+      .then(user => {
+        if (user.id) {
+          document.getElementById('username').innerText = user.username;
+          document.getElementById('avatar').src = `https://discordapp.com{user.id}/${user.avatar}.png`;
+          return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
+            headers: { authorization: `Bearer ${token}` }
+          });
+        }
+      })
+      .then(res => res ? res.json() : null)
+      .then(member => {
+        if (member && member.roles) {
+          document.getElementById('cargo').innerText = "Membro da Empresa ✓";
+        } else {
+          document.getElementById('cargo').innerText = "Não localizado na empresa";
+        }
+        document.getElementById('msg').innerText = "";
+      })
+      .catch(err => {
+        console.error("Erro:", err);
+        logout();
+      });
+    }
+
+    function logout() {
+        localStorage.removeItem('discord_token');
+        window.location.href = window.location.pathname;
+    }
 </script>
 </body>
 </html>
