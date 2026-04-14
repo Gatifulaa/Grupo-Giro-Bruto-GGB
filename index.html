@@ -259,44 +259,34 @@
 
     if (!loginLink || !navContainer) return;
 
-    fetch('https://discord.com', {
+    fetch('https://discord.com/api/users/@me', {
       headers: { authorization: `Bearer ${token}` }
     })
     .then(res => res.json())
     .then(user => {
       if (user.id) {
         const avatarUrl = `https://discordapp.com{user.id}/${user.avatar}.png`;
-            
-            loginLink.outerHTML = `
-                <div id="perfil-header" style="display: flex; align-items: center; gap: 10px; margin-left: 15px;">
-                    <img src="${avatarUrl}" style="width: 35px; border-radius: 50%; border: 2px solid var(--yellow);">
-                    <div style="text-align: left;">
-                        <div style="font-size: 14px; font-weight: bold; color: white;">${user.username}</div>
-                        <div id="cargo-status" style="font-size: 10px; color: var(--yellow);">Carregando...</div>
-                    </div>
-                    <button onclick="logout()" style="background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 12px; padding: 0;">Sair</button>
-                </div>
-            `;
+        
+        loginLink.outerHTML = `
+            <div id="perfil-header" style="display: flex; align-items: center; gap: 10px;">
+                <img src="${avatarUrl}" style="width: 30px; border-radius: 50%;">
+                <span style="color: white; font-weight: bold;">${user.username}</span>
+                <button onclick="logout()" style="color: red; background: none; border: none; cursor: pointer;">Sair</button>
+            </div>
+        `;
 
         return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
-          headers: { authorization: `Bearer ${token}` }
+            headers: { 'Authorization': `Bearer ${token}` }
         });
       }
     })
-    .then(res => res ? res.json() : null)
+    .then(res => res && res.ok ? res.json() : null)
     .then(member => {
-      const cargoStatus = document.getElementById('cargo-status');
-      if (cargoStatus) {
-        if (member && member.roles) {
-          cargoStatus.innerText = "Membro GGB ✓";
-        } else {
-          cargoStatus.innerText = "Não vinculado";
-          cargoStatus.style.color = "#ff4d4d";
-        }
-      }
+        console.log("Membro carregado:", member);
     })
     .catch(err => {
-      console.error("Erro ao carregar dados:", err);
+        console.error("Erro na API do Discord:", err);
+        if (err.message.includes('401')) logout();
     });
   }
 
