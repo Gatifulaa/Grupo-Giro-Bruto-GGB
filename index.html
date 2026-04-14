@@ -289,7 +289,7 @@
     .then(res => res.json())
     .then(user => {
       if (user.id) {
-        const avatarUrl = user.avatar;
+        const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`;
         
         loginLink.outerHTML = `
           <div class="user-profile-header">
