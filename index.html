@@ -290,7 +290,7 @@
     .then(user => {
       if (user.id) {
         const avatarUrl = user.avatar 
-                ? `https://discordapp.com/{user.id}/${user.avatar}.png`
+                ? `https://discordapp.com/${user.id}/${user.avatar}.png`
                 : `https://discordapp.com`;
         
         loginLink.outerHTML = `
