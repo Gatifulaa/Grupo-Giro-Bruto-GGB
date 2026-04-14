@@ -283,7 +283,7 @@
 
     if (!loginLink || !navContainer) return;
 
-    fetch('https://discord.com/api/users/@me', {
+    fetch('https://discord.com/api/users/', {
       headers: { authorization: `Bearer ${token}` }
     })
     .then(res => res.json())
