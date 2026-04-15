@@ -2,6 +2,40 @@
   const REDIRECT_URI = "https://grupo-giro-bruto-ggb.vercel.app/"; 
   const ID_DA_EMPRESA = '1493000493335838813';
 
+  function navegar(destino) {
+    const home = document.getElementById('home-page');
+    const dash = document.getElementById('dashboard-page');
+
+    if (!home || !dash) {
+        console.error("ERRO: IDs home-page ou dashboard-page não encontradas no HTML!");
+        return;
+    }
+
+    if (destino === 'perfil' || destino === 'config') {
+        home.style.display = 'none';
+        dash.style.display = 'block';
+        if (typeof showTab === 'function') {
+            showTab(destino);
+        }
+    } else {
+        home.style.display = 'block';
+        dash.style.display = 'none';
+    }
+
+    const menu = document.getElementById("dropdown-menu");
+    if (menu) menu.classList.remove("show");
+    
+    window.scrollTo(0, 0);
+}
+
+function showTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.dash-nav a').forEach(l => l.classList.remove('active'));
+
+    document.getElementById('tab-' + tabName).classList.add('active');
+    document.getElementById('link-' + tabName).classList.add('active');
+}
+
   window.onload = () => {
     const loginBtn = document.getElementById('login-link');
 
@@ -89,29 +123,3 @@
           }
       }
   }
-
-  function navegar(destino) {
-    const home = document.getElementById('home-page');
-    const dash = document.getElementById('dashboard-page');
-
-    if (destino === 'perfil' || destino === 'config') {
-        home.style.display = 'none';
-        dash.style.display = 'block';
-        showTab(destino);
-    } else {
-        home.style.display = 'block';
-        dash.style.display = 'none';
-    }
-    
-    const dropdown = document.getElementById("dropdown-menu");
-    if(dropdown) dropdown.classList.remove("show");
-    window.scrollTo(0, 0);
-}
-
-function showTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.dash-nav a').forEach(l => l.classList.remove('active'));
-
-    document.getElementById('tab-' + tabName).classList.add('active');
-    document.getElementById('link-' + tabName).classList.add('active');
-}
