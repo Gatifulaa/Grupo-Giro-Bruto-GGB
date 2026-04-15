@@ -609,6 +609,7 @@ nav .btn-login:hover {
   }
 
   .user-name {
+      font-family: 'Bebas Neue', sans-serif;
       color: white;
       font-weight: bold;
       font-size: 14px;
