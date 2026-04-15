@@ -46,8 +46,8 @@
               <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i>
             </div>
             <div id="dropdown-menu" class="dropdown-content">
-              <a href="/perfil"><i class="fas fa-user"></i> Perfil</a>
-              <a href="/config"><i class="fas fa-cog"></i> Config</a>
+              <a href="javascript:void(0)" onclick="navegar('perfil')"><i class="fas fa-user"></i> Perfil</a>
+              <a href="javascript:void(0)" onclick="navegar('config')"><i class="fas fa-cog"></i> Config</a>
               <hr style="border: 0; border-top: 1px solid #444; margin: 5px 0;">
               <a href="javascript:void(0)" onclick="logout()" class="logout-item"><i class="fas fa-sign-out-alt"></i> Sair</a>
             </div>
@@ -103,18 +103,15 @@
         dash.style.display = 'none';
     }
     
-    // Fecha o menu dropdown
     const dropdown = document.getElementById("dropdown-menu");
     if(dropdown) dropdown.classList.remove("show");
     window.scrollTo(0, 0);
 }
 
 function showTab(tabName) {
-    // Esconde todas as abas internas do dashboard
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.dash-nav a').forEach(l => l.classList.remove('active'));
 
-    // Mostra a selecionada
     document.getElementById('tab-' + tabName).classList.add('active');
     document.getElementById('link-' + tabName).classList.add('active');
 }
