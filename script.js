@@ -75,7 +75,7 @@ function showTab(tabName) {
         loginLink.outerHTML = `
           <div class="user-dropdown">
             <div class="user-profile-header" onclick="toggleMenu()">
-              <img src="${avatarUrl}" class="user-avatar">
+              <img src="${avatarUrl}" class="user-avatar" alt="Avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'>
               <span class="user-name">${user.username}</span>
               <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i>
             </div>
@@ -87,6 +87,9 @@ function showTab(tabName) {
             </div>
           </div>
         `;
+
+        document.getElementById('user-name-dash').innerText = user.username;
+        document.getElementById('user-avatar-dash').src = avatarUrl;
 
         return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
           headers: { authorization: `Bearer ${token}` }
