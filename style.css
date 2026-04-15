@@ -667,112 +667,196 @@ nav .btn-login:hover {
   .show { display: block !important; }
 
   /* DASHBOARD GGB */
-.dashboard-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    min-height: 100vh;
-    background: var(--darker);
-}
 
-.dash-sidebar {
-    background: rgba(255,255,255,0.02);
-    border-right: 1px solid var(--border);
-    padding: 110px 25px 40px;
-}
+  #dashboard-page {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--darker);
+  }
 
-.user-info-side {
-    text-align: center;
-    margin-bottom: 35px;
-}
+  .dashboard-container {
+      display: grid;
+      grid-template-columns: 280px 1fr; 
+      min-height: 100vh;
+      width: 100%;
+  }
 
-#user-avatar-dash {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid var(--yellow);
-    margin-bottom: 12px;
-}
+  /* SIDEBAR */
+  .dash-sidebar {
+      background: rgba(255, 255, 255, 0.02);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+  }
 
-#user-name-dash {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    color: var(--white);
-    letter-spacing: 1px;
-}
+  .user-info-side {
+      text-align: center;
+      margin-bottom: 40px;
+  }
 
-.dash-nav a {
-    padding: 12px 18px;
-    color: var(--gray);
-    text-decoration: none;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-radius: 4px;
-    margin-bottom: 5px;
-    transition: 0.3s;
-}
+  #user-avatar-dash {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--yellow);
+      margin-bottom: 15px;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(255, 214, 0, 0.1);
+  }
 
-.dash-nav a.active, .dash-nav a:hover {
-    background: rgba(255, 214, 0, 0.1);
-    color: var(--yellow);
-}
+  #user-name-dash {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: 5px;
+  }
 
-.dash-nav a.back-home {
-    margin-top: 30px;
-    border: 1px dashed var(--border);
-}
+  .badge-status {
+      font-size: 10px;
+      background: var(--yellow);
+      color: var(--dark);
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+  }
 
-.dash-content {
-    padding: 110px 50px 50px;
-}
+  /* NAVEGAÇÃO INTERNA */
+  .dash-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+  }
 
-.tab-content {
-    display: none;
-}
+  .dash-nav a {
+      padding: 14px 18px;
+      color: var(--gray);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.3s;
+  }
 
-.tab-content.active {
-    display: block;
-    animation: fadeInDash 0.4s ease-out;
-}
+  .dash-nav a i { width: 20px; text-align: center; }
 
-.profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 25px;
-    margin-top: 35px;
-}
+  .dash-nav a.active, 
+  .dash-nav a:hover {
+      background: rgba(255, 214, 0, 0.08);
+      color: var(--yellow);
+  }
 
-.profile-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border);
-    padding: 25px;
-    border-radius: 4px;
-}
+  .dash-nav a.back-home {
+      margin-top: auto;
+      border: 1px dashed var(--border);
+      background: transparent;
+  }
 
-.stat-box {
-    margin-bottom: 20px;
-}
+  /* CONTEÚDO PRINCIPAL */
+  .dash-content {
+      padding: 120px 60px 60px;
+  }
 
-.stat-box .lbl { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; font-family: 'Oswald'; }
-.stat-box .num { font-size: 2.5rem; font-family: 'Bebas Neue'; color: var(--yellow); line-height: 1; }
+  .tab-content {
+      display: none;
+      max-width: 1000px;
+  }
 
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-}
+  .tab-content.active {
+      display: block;
+      animation: dashFade 0.4s ease-out;
+  }
 
-@keyframes fadeInDash {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+  .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 30px;
+      margin-top: 40px;
+  }
 
-@media (max-width: 850px) {
-    .dashboard-container { grid-template-columns: 1fr; }
-    .dash-sidebar { padding-top: 90px; }
-    .dash-content { padding: 30px 20px; }
-}
+  .profile-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 30px;
+      border-radius: 4px;
+  }
+
+  .profile-card h3 {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--yellow);
+  }
+
+  /* Infos */
+  .stat-box { margin-bottom: 30px; }
+  .stat-box:last-child { margin-bottom: 0; }
+
+  .stat-box .lbl { 
+      display: block; 
+      font-family: 'Oswald'; 
+      font-size: 0.75rem; 
+      color: var(--gray); 
+      letter-spacing: 2px; 
+      text-transform: uppercase;
+  }
+
+  .stat-box .num { 
+      font-family: 'Bebas Neue'; 
+      font-size: 3.5rem; 
+      color: var(--white); 
+      line-height: 1;
+  }
+
+  .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+  }
+
+  .info-row label { font-family: 'Oswald'; font-size: 0.8rem; color: var(--gray); text-transform: uppercase; }
+  .info-row span { font-weight: 500; }
+
+  /* CONFIG DASH */
+  .config-form {
+      max-width: 500px;
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 30px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+  }
+
+  @keyframes dashFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVIDADE */
+  @media (max-width: 1024px) {
+      .profile-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+      .dashboard-container { grid-template-columns: 1fr; }
+      .dash-sidebar { 
+          height: auto; 
+          position: relative; 
+          padding-top: 100px; 
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+      }
+      .dash-content { padding: 40px 20px; }
+  }
