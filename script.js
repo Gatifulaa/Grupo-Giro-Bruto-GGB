@@ -1,24 +1,3 @@
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(r => obs.observe(r));
-
-  window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const links = document.querySelectorAll('nav a');
-    let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
-    links.forEach(l => {
-      l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--yellow)' : '';
-    });
-  });
-
   const CLIENT_ID = '1493686411704930304'; 
   const REDIRECT_URI = "https://grupo-giro-bruto-ggb.vercel.app/"; 
   const ID_DA_EMPRESA = '1493000493335838813';
