@@ -12,9 +12,8 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
-
-  body {
+  body, html {
+    scroll-behavior: smooth;
     font-family: 'Barlow', sans-serif;
     background: var(--darker);
     color: var(--white);
@@ -669,34 +668,35 @@ nav .btn-login:hover {
   /* DASHBOARD GGB */
 
   #dashboard-page {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       min-height: 100vh;
       background: var(--darker);
-      margin: 0;
-      padding: 0;
-      display: none;
+      z-index: 999;
+      margin: 0 !important;
   }
 
-  /* Principal Dash */
   .dashboard-container {
       display: grid;
       grid-template-columns: 280px 1fr;
       min-height: 100vh;
       width: 100%;
-      margin: 0;
   }
 
-  /* Left */
   .dash-sidebar {
       background: rgba(255, 255, 255, 0.02);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       height: 100vh;
-      position: sticky;
-      top: 0;
-      padding: 100px 20px 30px;
-      z-index: 10;
+      padding: 40px 20px;
+  }
+
+  .dash-content {
+      padding: 60px 50px 40px; 
+      background: var(--darker);
   }
 
   .user-info-side {
@@ -767,10 +767,6 @@ nav .btn-login:hover {
   }
 
   /* Right */
-  .dash-content {
-      padding: 100px 50px 40px;
-      background: var(--darker);
-  }
 
   .tab-content {
       display: none;
