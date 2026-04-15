@@ -18,6 +18,8 @@
     background: var(--darker);
     color: var(--white);
     overflow-x: hidden;
+    width: 100%;
+    height: 100%;
   }
 
   /* ── HEADER ── */
@@ -668,35 +670,39 @@ nav .btn-login:hover {
   /* DASHBOARD GGB */
 
   #dashboard-page {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      min-height: 100vh;
-      background: var(--darker);
-      z-index: 999;
-      margin: 0 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #050505;
+    z-index: 9999;
+    display: none;
   }
 
   .dashboard-container {
       display: grid;
       grid-template-columns: 280px 1fr;
-      min-height: 100vh;
       width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
   }
 
   .dash-sidebar {
       background: rgba(255, 255, 255, 0.02);
       border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
       height: 100vh;
       padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
   }
 
   .dash-content {
-      padding: 60px 50px 40px; 
-      background: var(--darker);
+      padding: 40px 50px;
+      background: #050505;
+      height: 100vh;
+      overflow-y: auto;
   }
 
   .user-info-side {
