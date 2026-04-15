@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
+<div class="home-page">
 <!-- HEADER -->
 <header>
   <div class="logo-header">
@@ -206,6 +206,79 @@
     <a href="#contato">Contato</a>
   </div>
 </footer>
+</div>
+
+<div id="dashboard-page" style="display: none;">
+    <section class="dashboard-container">
+        <aside class="dash-sidebar">
+            <div class="user-info-side">
+                <img src="" id="user-avatar-dash" alt="Avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                <h3 id="user-name-dash">Motorista</h3>
+                <span class="badge-status">Membro Ativo</span>
+            </div>
+            
+            <nav class="dash-nav">
+                <a href="javascript:void(0)" id="link-perfil" class="active" onclick="showTab('perfil')">
+                    <i class="fas fa-id-card"></i> Meu Perfil
+                </a>
+                <a href="javascript:void(0)" id="link-config" onclick="showTab('config')">
+                    <i class="fas fa-user-gear"></i> Configurações
+                </a>
+                <a href="javascript:void(0)" onclick="navegar('home')" class="back-home">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Início
+                </a>
+            </nav>
+        </aside>
+
+        <main class="dash-content">
+            <div id="tab-perfil" class="tab-content active">
+                <span class="section-label">Central do Motorista</span>
+                <h2 class="section-title">MEU <span>PERFIL</span></h2>
+                
+                <div class="profile-grid">
+                    <div class="profile-card stats">
+                        <div class="stat-box">
+                            <span class="lbl">Km Totais</span>
+                            <span class="num">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="lbl">Viagens GGB</span>
+                            <span class="num">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-card info-geral">
+                        <h3>Detalhes da Conta</h3>
+                        <div class="info-row"><label>Acesso:</label><span>Discord Autenticado</span></div>
+                        <div class="info-row"><label>VTC:</label><span>Grupo Giro Bruto</span></div>
+                        <div class="info-row"><label>Patente:</label><span style="color:var(--yellow)">Recruta</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-config" class="tab-content">
+                <span class="section-label">Preferências Gerais</span>
+                <h2 class="section-title">CONFIG<span>URAÇÕES</span></h2>
+                
+                <div class="config-form">
+                    <div class="form-group">
+                        <label>Nome Preferencial</label>
+                        <input type="text" id="cfg-name" placeholder="Nome para os registros">
+                    </div>
+                    <div class="form-group">
+                        <label>Mapa de Atuação</label>
+                        <select id="cfg-map">
+                            <option value="br">Mapas Brasileiros</option>
+                            <option value="eu">Mapas Europeus</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 20px;" onclick="alert('Configurações salvas!')">ATUALIZAR DADOS</button>
+                </div>
+            </div>
+        </main>
+    </section>
+</div>
+
 <script>
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver((entries) => {

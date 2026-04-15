@@ -665,3 +665,114 @@ nav .btn-login:hover {
   .logout-item { color: #ff4d4d !important; }
 
   .show { display: block !important; }
+
+  /* DASHBOARD GGB */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 100vh;
+    background: var(--darker);
+}
+
+.dash-sidebar {
+    background: rgba(255,255,255,0.02);
+    border-right: 1px solid var(--border);
+    padding: 110px 25px 40px;
+}
+
+.user-info-side {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+#user-avatar-dash {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--yellow);
+    margin-bottom: 12px;
+}
+
+#user-name-dash {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: 1px;
+}
+
+.dash-nav a {
+    padding: 12px 18px;
+    color: var(--gray);
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.dash-nav a.active, .dash-nav a:hover {
+    background: rgba(255, 214, 0, 0.1);
+    color: var(--yellow);
+}
+
+.dash-nav a.back-home {
+    margin-top: 30px;
+    border: 1px dashed var(--border);
+}
+
+.dash-content {
+    padding: 110px 50px 50px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeInDash 0.4s ease-out;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    padding: 25px;
+    border-radius: 4px;
+}
+
+.stat-box {
+    margin-bottom: 20px;
+}
+
+.stat-box .lbl { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; font-family: 'Oswald'; }
+.stat-box .num { font-size: 2.5rem; font-family: 'Bebas Neue'; color: var(--yellow); line-height: 1; }
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+@keyframes fadeInDash {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 850px) {
+    .dashboard-container { grid-template-columns: 1fr; }
+    .dash-sidebar { padding-top: 90px; }
+    .dash-content { padding: 30px 20px; }
+}

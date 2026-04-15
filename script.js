@@ -89,3 +89,32 @@
           }
       }
   }
+
+  function navegar(destino) {
+    const home = document.getElementById('home-page');
+    const dash = document.getElementById('dashboard-page');
+
+    if (destino === 'perfil' || destino === 'config') {
+        home.style.display = 'none';
+        dash.style.display = 'block';
+        showTab(destino);
+    } else {
+        home.style.display = 'block';
+        dash.style.display = 'none';
+    }
+    
+    // Fecha o menu dropdown
+    const dropdown = document.getElementById("dropdown-menu");
+    if(dropdown) dropdown.classList.remove("show");
+    window.scrollTo(0, 0);
+}
+
+function showTab(tabName) {
+    // Esconde todas as abas internas do dashboard
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.dash-nav a').forEach(l => l.classList.remove('active'));
+
+    // Mostra a selecionada
+    document.getElementById('tab-' + tabName).classList.add('active');
+    document.getElementById('link-' + tabName).classList.add('active');
+}
