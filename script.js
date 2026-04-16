@@ -2,6 +2,12 @@
   const REDIRECT_URI = "https://grupo-giro-bruto-ggb.vercel.app/"; 
   const ID_DA_EMPRESA = '1493000493335838813';
 
+  const CARGOS_GGB = {
+    "1493022366928863454": { nome: "CHOFER", cor: "#f1c40f" },
+    "1493011319475929328": { nome: "FECHO", cor: "#e74c3c" },
+    "1493009576176521409": { nome: "CHOFER", cor: "#3498db" }
+  };
+
   function navegar(destino) {
     const home = document.getElementById('home-page');
     const dash = document.getElementById('dashboard-page');
@@ -91,18 +97,35 @@ function showTab(tabName) {
         document.getElementById('user-name-dash').innerText = user.username;
         document.getElementById('user-avatar-dash').src = avatarUrl;
 
-        return fetch(`https://discord.com/guilds/${ID_DA_EMPRESA}/member`, {
+        return fetch(`https://discord.com/api/users/@me/guilds/${ID_DA_EMPRESA}/member`, {
           headers: { authorization: `Bearer ${token}` }
-        });;
+        });
       }
     })
     .then(res => res && res.ok ? res.json() : null)
     .then(member => {
-        console.log("Membro carregado:", member);
+        if (member && member.roles) {
+            const patenteSpan = document.getElementById('user-patente');
+            if (patenteSpan) {
+                let cargoFinal = "Visitante";
+                let corFinal = "var(--yellow)";
+
+                for (const idCargo in CARGOS_GGB) {
+                    if (member.roles.includes(idCargo)) {
+                        cargoFinal = CARGOS_GGB[idCargo].nome;
+                        corFinal = CARGOS_GGB[idCargo].cor;
+                        break;
+                    }
+                }
+                
+                patenteSpan.innerText = cargoFinal;
+                patenteSpan.style.color = corFinal;
+            }
+        }
     })
     .catch(err => {
         console.error("Erro na API do Discord:", err);
-        if (err.message.includes('401')) logout();
+        if (err && err.message && err.message.includes('401')) logout();
     });
   }
 
