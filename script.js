@@ -3,7 +3,7 @@
   const ID_DA_EMPRESA = '1493000493335838813';
 
   const CARGOS_GGB = {
-    "1493022366928863454": { nome: "CHOFER", cor: "#f1c40f" },
+    "1493022366928863454": { nome: "PONTA", cor: "#f1c40f" },
     "1493011319475929328": { nome: "FECHO", cor: "#e74c3c" },
     "1493009576176521409": { nome: "CHOFER", cor: "#3498db" }
   };
